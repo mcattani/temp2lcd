@@ -1,4 +1,6 @@
 # temp2lcd
+v1.0.7
+
 Aplicación hecha en Gambas para enviar información de temperatura del CPU/GPU al Arduino.
 
 La aplicación transmite las temperaturas del *CPU* y el *GPU* hacia el Arduino vía el puerto USB.

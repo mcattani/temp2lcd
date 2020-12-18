@@ -2,7 +2,7 @@
 Title=Temp2LCD
 Startup=FMain
 Icon=icon.png
-Version=1.0.7
+Version=1.0.8
 Component=gb.image
 Component=gb.gui
 Component=gb.form
