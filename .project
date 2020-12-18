@@ -1,0 +1,17 @@
+# Gambas Project File 3.0
+Title=Temp2LCD
+Startup=FMain
+Icon=icon.png
+Version=1.0.7
+Component=gb.image
+Component=gb.gui
+Component=gb.form
+Component=gb.desktop
+Component=gb.settings
+Component=gb.net
+Description="Pequeña aplicación que envía las temperaturas de la CPU y GPU (solo Nvidia) por USB al Arduino."
+Authors="TheNerdyApprentice"
+TabSize=2
+Language=es_AR
+Vendor=TheNerdyApprentice
+Packager=1

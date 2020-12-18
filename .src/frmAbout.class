@@ -1,0 +1,26 @@
+' Gambas class file
+
+
+Public Sub Form_Open()
+
+  
+
+End
+
+Public Sub btCerrar_Click()
+
+  Me.Close
+  
+End
+
+Public Sub btCerrar_KeyPress()
+
+  If Key.code = Key.esc Then Me.Close
+  
+End
+
+Public Sub URL_Click()
+
+  Desktop.Open(URL.Link)
+  
+End

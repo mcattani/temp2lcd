@@ -1,0 +1,233 @@
+' Gambas class file
+
+CpuT As String
+GpuT As String
+
+
+Public Sub Form_Open()
+FMain.Text = Application.Name & " v" & Application.Version
+
+cbVelocidad.Index = 5 ' Elegimos por defecto 9600 baudios
+
+'Chequeamos que existan los programas necesarios para correr el programa
+If Not Exist("/usr/bin/sensors") Then  
+  Message.Warning("¡Debe tener instalado 'sensors' para poder utilizar este programa!")
+  Return  
+Endif
+
+If Not Exist("/usr/bin/nvidia-smi") Then
+  Message.Warning("¡Debe tener instalado 'nvidia-smi para poder utilizar este programa!")
+  Return
+Endif
+
+btConectar.Enabled = True ' Habilitamos el botón de conexión
+
+Timer1.Enabled = True ' Activamos el timer que muestra la temperatura
+
+If sPort.Status = Net.Active Then sPort.Close ' Cerramos el puerto si está abierto
+
+'Recuperamos los valores por defecto.
+spTiempo.Value = Settings["Delay-Timer2"]
+Timer2.Delay = spTiempo.Value * 1000 ' Asignamos el delay al Timer2 en milisegundos
+cbVelocidad.Index = Settings["Velocidad"]
+txPuerto.Text = Settings["Puerto"]
+
+
+End
+
+Public Sub Form_KeyPress()
+' Al presionar 'esc' salimos del programa, primero cerramos el puerto si está abierto
+  If Key.code = Key.Esc Then
+    sPort.Close
+    Timer2.Enabled = False
+    'Llamamos a la rutina que guarda los valores
+    GuardarValores()
+    Quit
+  Endif
+  
+
+End
+
+Public Sub tCPU() As String ' Rutina que ejectura el script que obtiene el promedio de temperatura de todos los núcleos del CPU
+Dim Salida As String
+
+  Try Shell (Application.Path & "/" & "temp_cpu.sh") To Salida
+
+  If Error Then
+    Message.Warning(Error.Code & Error.Text)
+    Return
+  Endif
+
+' El script devuelve la temperatura en formato ##.## o ###.00 Recortamos los dos o tres primeros dígitos según el tamaño del string. 
+If Len(Salida) = 6 Then
+  Salida = Left(Salida, 2)
+  Else
+    If Len(Salida) = 7 Then
+      Salida = Left(Salida, 3)
+    Endif
+Endif
+
+Return Trim(Salida)
+
+ 
+End
+
+Public Sub tGPU() As String ' Rutina que ejecuta el comando que devuelve la temperatura del GPU
+Dim Salida As String
+  
+  Try Shell ("nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader") To Salida
+  
+  If Error Then
+    Message.Warning(Error.Code & Error.Text)
+    Return
+  Endif
+
+
+Return Trim(Salida)
+  
+End
+
+
+Public Sub btConectar_Click()
+
+If sPort.Status = Net.Active Then sPort.Close ' Cerramos el puerto si está abierto
+
+'Chequemos que haya un puerto escrito y lo asignamos
+If txPuerto.Text = "" Then
+  Message.Warning("Debe elegir un puerto para realizar la conexión")
+  Return
+  Else
+    sPort.PortName = txPuerto.Text
+    sPort.Speed = cbVelocidad.Text ' Asignamos también la velocidad.
+ Endif
+
+'Conectamos
+Try sPort.Open()
+If Error Then
+  Message.Warning("No se ha podido conectar con el puerto - " & Error.Text)
+  Return
+Endif
+
+If sPort.Status = Net.Active Then ' Si la conexión es exitosa
+  txSalida.Text = txSalida.Text & "Conectado..." & gb.CrLf
+Endif
+
+btDesconectar.Enabled = True ' Activamos el botón de desconexión
+Timer2.Enabled = True ' Activamos el Timer que envía la información
+
+
+
+End
+
+Public Sub btDesconectar_Click()
+
+  Timer2.Enabled = False
+  sPort.Close
+  txSalida.Text = txSalida.Text & "Desconectado..." & gb.CrLf
+  btDesconectar.Enabled = False
+    
+End
+
+Public Sub sPort_Read() ' En esta rutima leemos lo que llega por el puerte serie y lo enviamos a la salida
+Dim RX As String
+
+Read #sPort, RX, Lof(sPort)
+txSalida.Text = txSalida.Text & RX 
+  
+  
+End
+
+
+Public Sub btSalir_Click()
+
+  sPort.Close
+  Timer2.Enabled = False
+  'Llamamos a la rutina que guarda los valores
+  GuardarValores()
+  Quit
+  
+
+End
+
+
+Public Sub Timer1_Timer() ' Este Timer repite los eventos que muestran la temperatura en la aplicación y las asigna a las variables
+' Mostramos la temperatura en los LCD
+  lcdCPU.Text = tCPU() & "C"
+  lcdGPU.Text = tGPU() & "C"
+
+' Asignamos las temperaturas a las variables 
+  CpuT = tCPU()
+  GpuT = tGPU()
+    
+End
+
+Public Sub EnviarData() ' Rutina para enviar la información al Arduino
+Dim Data As String
+Data = CpuT & "C" & "   " & GpuT & "C" & "\n"
+
+Print Data
+
+If sPort.Status = Net.Active Then
+  Try Print #sPort, Data
+    
+  Else
+    Message.Warning("El puerto se ha cerrado!, debe volver a establecer la conexión")
+    Return
+  
+Endif  
+  
+End
+
+
+Public Sub Timer2_Timer() ' Este timer, una vez activado envía la información al Arduino cada X segundos.
+
+If sPort.Status = Net.Active Then
+  EnviarData()
+  Else
+    Timer2.Enabled = False
+Endif
+ 
+End
+
+Public Sub txSalida_DblClick()
+  txSalida.Text = "" ' Por si queremos limpiar la salida de información
+
+
+End
+
+Public Sub txSalida_Change() ' Hacemos scroll down automaticamente en el textbox de salida.
+
+  txSalida.pos = txSalida.Length
+  txSalida.EnsureVisible
+  
+
+End
+
+Public Sub btAcerca_Click()
+
+  frmAbout.Show
+  
+
+End
+
+Public Sub spTiempo_Change() ' El evento cambia el valor del delay del Timer2 (cada cuanto se envía la info al Arduino)
+Dim Delay As Integer
+Delay = spTiempo.Value * 1000 ' Se multiplica por mil para pasar de segundos a milésimas de segundo.
+Timer2.delay = Delay
+
+End
+
+Public Sub Form_Close()
+' Llamamos a la rutina que guarda los valores
+GuardarValores()
+
+  
+End
+
+Public Sub GuardarValores() ' Rutina para guardar los valores por defecto si se cierra el programa
+Settings["Delay-Timer2"] = spTiempo.Value
+Settings["Puerto"] = txPuerto.Text
+Settings["Velocidad"] = cbVelocidad.Index
+  
+End
+
