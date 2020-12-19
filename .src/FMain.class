@@ -32,6 +32,13 @@ Timer2.Delay = spTiempo.Value * 1000 ' Asignamos el delay al Timer2
 cbVelocidad.Index = Settings["Velocidad"]
 txPuerto.Text = Settings["Puerto"]
 
+' Chequeamos que exista el script y si no se copia y se hace ejecutable
+If Not Exist(User.Home &/ ".temp2lcd/temp_cpu.sh") Then
+  Mkdir User.Home &/ ".temp2lcd"
+  Copy "./temp_cpu.sh" To User.Home &/ ".temp2lcd/temp_cpu.sh"
+  Chmod User.Home &/ ".temp2lcd/temp_cpu.sh" To "rwxr-x---"
+Endif
+
 
 End
 
@@ -51,8 +58,8 @@ End
 Public Sub tCPU() As String ' Rutina que ejectura el script que obtiene el promedio de temperatura de todos los núcleos del CPU
 Dim Salida As String
 
-  Try Shell (Application.Path & "/" & "temp_cpu.sh") To Salida
-
+  Try Shell (User.Home &/ ".temp2lcd/temp_cpu.sh") To Salida
+  
   If Error Then
     Message.Warning(Error.Code & Error.Text)
     Return
