@@ -28,7 +28,7 @@ If sPort.Status = Net.Active Then sPort.Close ' Cerramos el puerto si está abie
 
 'Recuperamos los valores por defecto.
 spTiempo.Value = Settings["Delay-Timer2"]
-Timer2.Delay = spTiempo.Value * 1000 ' Asignamos el delay al Timer2 en milisegundos
+Timer2.Delay = spTiempo.Value * 1000 ' Asignamos el delay al Timer2
 cbVelocidad.Index = Settings["Velocidad"]
 txPuerto.Text = Settings["Puerto"]
 
@@ -210,7 +210,7 @@ Public Sub btAcerca_Click()
 
 End
 
-Public Sub spTiempo_Change() ' El evento cambia el valor del delay del Timer2 (cada cuanto se envía la info al Arduino)
+Public Sub spTiempo_Change() ' El evento cambia el valor del delay del Timer2 
 Dim Delay As Integer
 Delay = spTiempo.Value * 1000 ' Se multiplica por mil para pasar de segundos a milésimas de segundo.
 Timer2.delay = Delay
