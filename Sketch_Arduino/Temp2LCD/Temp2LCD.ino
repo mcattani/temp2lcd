@@ -12,7 +12,6 @@
 #include <LiquidCrystal_I2C.h>
 
 const int LED = 13;
-//char Datos[16];
 
 //Seteamos la dirección del LCD -> En mi caso 0x27
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
