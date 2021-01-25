@@ -18,6 +18,6 @@ También hay un LED conectado al PIN 13 que enciende cuando se produce el evento
 
 En el repositorio se encuentra el código fuente. paquetes de instalación para **debian** y el sketch de Arduino.
 
-Más información en mi blog: https://thenerdyapprentice.blogspot.com/
+Más información en mi blog: https://thenerdyapprentice.blogspot.com/2020/12/temp2lcd-gambas-arduino.html
 
 Saludos!.
