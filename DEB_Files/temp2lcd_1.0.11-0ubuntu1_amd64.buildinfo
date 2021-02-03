@@ -2,19 +2,19 @@ Format: 1.0
 Source: temp2lcd
 Binary: temp2lcd
 Architecture: all source
-Version: 1.0.10-0ubuntu1
+Version: 1.0.11-0ubuntu1
 Checksums-Md5:
- 9325ff722791c927e4ef3484ae313955 1147 temp2lcd_1.0.10-0ubuntu1.dsc
- 66224260692df571e2c9221b395faaab 37428 temp2lcd_1.0.10-0ubuntu1_all.deb
+ 6e1f8b7e1594f2fdf5520a97e5dd0ed2 1167 temp2lcd_1.0.11-0ubuntu1.dsc
+ d1a2e8cb0f1fb7b30be2036e274905eb 127952 temp2lcd_1.0.11-0ubuntu1_all.deb
 Checksums-Sha1:
- 52d0917ce1bc1dfdb44b9cba7efe97df3f05c87a 1147 temp2lcd_1.0.10-0ubuntu1.dsc
- 072b79400caa5e940dc1da4599d3d5e3f8274a48 37428 temp2lcd_1.0.10-0ubuntu1_all.deb
+ 89b3837a199bf7494d632d9ebecde328ed9d8a1d 1167 temp2lcd_1.0.11-0ubuntu1.dsc
+ 5889d2e1dc52d6d6eedf7d836216db48739939db 127952 temp2lcd_1.0.11-0ubuntu1_all.deb
 Checksums-Sha256:
- 5bb4bcbafeb5181b3508ec86578f8182154f7e87f4262624662c46873d682d73 1147 temp2lcd_1.0.10-0ubuntu1.dsc
- 3a3194415628fc6306e9d6278c896c558976f85eaa68d8ed277d2944724bf83d 37428 temp2lcd_1.0.10-0ubuntu1_all.deb
+ d7bc4079dc889e88f2b2839f67fd3af602626bb734d0a621033adf179776f64c 1167 temp2lcd_1.0.11-0ubuntu1.dsc
+ 4a8176e8fc7da59e131264767c79a190a8c32d5a66688f6c75a7bb4081be4a72 127952 temp2lcd_1.0.11-0ubuntu1_all.deb
 Build-Origin: Ubuntu
 Build-Architecture: amd64
-Build-Date: Sat, 19 Dec 2020 17:29:41 -0300
+Build-Date: Tue, 02 Feb 2021 23:22:33 -0300
 Build-Tainted-By:
  merged-usr-via-symlinks
  usr-local-has-programs
@@ -69,7 +69,7 @@ Installed-Build-Depends:
  gettext-base (= 0.19.8.1-10build1),
  grep (= 3.4-1),
  groff-base (= 1.22.4-5),
- gzip (= 1.10-2ubuntu1),
+ gzip (= 1.10-2ubuntu1.1),
  hostname (= 3.23),
  init-system-helpers (= 1.58),
  install-info (= 6.7.0.dfsg.2-5),
@@ -102,7 +102,7 @@ Installed-Build-Depends:
  libdebconfclient0 (= 0.252ubuntu1),
  libdebhelper-perl (= 13.2.1ubuntu1),
  libdpkg-perl (= 1.20.5ubuntu2),
- libelf1 (= 0.181-1),
+ libelf1 (= 0.181-1ubuntu0.1),
  libffi8ubuntu1 (= 3.4~20200819gead65ca871-0ubuntu3),
  libfile-stripnondeterminism-perl (= 1.9.0-1),
  libgcc-10-dev (= 10.2.0-13ubuntu1),
@@ -153,7 +153,7 @@ Installed-Build-Depends:
  libstdc++-10-dev (= 10.2.0-13ubuntu1),
  libstdc++6 (= 10.2.0-13ubuntu1),
  libsub-override-perl (= 0.09-2),
- libsystemd0 (= 246.6-1ubuntu1),
+ libsystemd0 (= 246.6-1ubuntu1.1),
  libtinfo6 (= 6.2-1),
  libtirpc-common (= 1.2.6-1build1),
  libtirpc-dev (= 1.2.6-1build1),
@@ -162,7 +162,7 @@ Installed-Build-Depends:
  libtsan0 (= 10.2.0-13ubuntu1),
  libubsan1 (= 10.2.0-13ubuntu1),
  libuchardet0 (= 0.0.7-1),
- libudev1 (= 246.6-1ubuntu1),
+ libudev1 (= 246.6-1ubuntu1.1),
  libunistring2 (= 0.9.10-4),
  libuuid1 (= 2.36-3ubuntu1),
  libx11-6 (= 2:1.6.12-1),
@@ -174,7 +174,7 @@ Installed-Build-Depends:
  libxml2 (= 2.9.10+dfsg-5build1),
  libxtst6 (= 2:1.2.3-1),
  libzstd1 (= 1.4.5+dfsg-4),
- linux-libc-dev (= 5.8.0-33.36),
+ linux-libc-dev (= 5.8.0-41.46),
  login (= 1:4.8.1-1ubuntu6),
  lsb-base (= 11.1.0ubuntu2),
  m4 (= 1.4.18-4),
@@ -193,14 +193,14 @@ Installed-Build-Depends:
  sed (= 4.7-1ubuntu1),
  sensible-utils (= 0.0.13),
  sysvinit-utils (= 2.96-3ubuntu1),
- tar (= 1.30+dfsg-7),
+ tar (= 1.30+dfsg-7ubuntu0.20.10.1),
  util-linux (= 2.36-3ubuntu1),
  x11-common (= 1:7.7+19ubuntu15),
- xdg-utils (= 1.1.3-2ubuntu1.20.10.1),
+ xdg-utils (= 1.1.3-2ubuntu1.20.10.2),
  xz-utils (= 5.2.4-1ubuntu1),
  zlib1g (= 1:1.2.11.dfsg-2ubuntu4)
 Environment:
  DEB_BUILD_OPTIONS="parallel=4"
  LANG="es_AR.UTF-8"
  LC_ALL="es_AR.UTF-8"
- SOURCE_DATE_EPOCH="1608379200"
+ SOURCE_DATE_EPOCH="1612267200"

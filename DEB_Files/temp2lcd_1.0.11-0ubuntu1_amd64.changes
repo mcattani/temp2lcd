@@ -1,0 +1,31 @@
+Format: 1.8
+Date: Tue, 02 Feb 2021 12:00:00 +0000
+Source: temp2lcd
+Binary: temp2lcd
+Architecture: source all
+Version: 1.0.11-0ubuntu1
+Distribution: unstable
+Urgency: low
+Maintainer: TheNerdyApprentice <marianocattani@gmail.com>
+Changed-By: TheNerdyApprentice <marianocattani@gmail.com>
+Description:
+ temp2lcd   - Pequeña aplicación que envía las temperaturas de la CPU y GPU...
+Changes:
+ temp2lcd (1.0.11-0ubuntu1) unstable; urgency=low
+ .
+   * Corrección con manejo de script
+Checksums-Sha1:
+ 89b3837a199bf7494d632d9ebecde328ed9d8a1d 1167 temp2lcd_1.0.11-0ubuntu1.dsc
+ 2394f0d7b323a1e5691080081e764b632eaf09f8 1525 temp2lcd_1.0.11-0ubuntu1.diff.gz
+ 5889d2e1dc52d6d6eedf7d836216db48739939db 127952 temp2lcd_1.0.11-0ubuntu1_all.deb
+ 9d61735c2e83cd14a6255fa9e27bcc9ceacb2ee9 6430 temp2lcd_1.0.11-0ubuntu1_amd64.buildinfo
+Checksums-Sha256:
+ d7bc4079dc889e88f2b2839f67fd3af602626bb734d0a621033adf179776f64c 1167 temp2lcd_1.0.11-0ubuntu1.dsc
+ 301a93352034f665e6140a842a8b2b1d424ccde61a3fca266f8c7ebbe4649992 1525 temp2lcd_1.0.11-0ubuntu1.diff.gz
+ 4a8176e8fc7da59e131264767c79a190a8c32d5a66688f6c75a7bb4081be4a72 127952 temp2lcd_1.0.11-0ubuntu1_all.deb
+ 3ebe977c27419d1c65908d0c1a309cf06266fff4e76296b119ca09f9a24185fb 6430 temp2lcd_1.0.11-0ubuntu1_amd64.buildinfo
+Files:
+ 6e1f8b7e1594f2fdf5520a97e5dd0ed2 1167 contrib/admin optional temp2lcd_1.0.11-0ubuntu1.dsc
+ 506712f879ac7dc2b698c6ed345fda0d 1525 contrib/admin optional temp2lcd_1.0.11-0ubuntu1.diff.gz
+ d1a2e8cb0f1fb7b30be2036e274905eb 127952 contrib/admin optional temp2lcd_1.0.11-0ubuntu1_all.deb
+ 3d92686f04627838f716f800cc94dacd 6430 contrib/admin optional temp2lcd_1.0.11-0ubuntu1_amd64.buildinfo
